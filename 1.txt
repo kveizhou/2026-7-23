@@ -1,0 +1,13 @@
+囈戽宫暹标滚轮改变大小(ESc链可以退出)
+#1.定义基础路径(自动适配你的用户名，无需修改)$SuperPowersPath ="D:\00work\01-LLM\121-superpowers\superpowers-main"$OpenCodeBasePath ="$env:USERPROFlLEv.configvopencode"echo $SuperPowersPath
+echo $OpenCodeBasePath
+# 2.仅删除 superpowers l日版本残留(绝不触碰其他插件/skill)Remove-ltem "$OpenCodeBasePathisuperpowers" -force -ErrorAction SilentlyContinueRemove-ltem "$OpenCodeB:sePath\plugins\superpowers.js"-Force -ErrorAction SilentlyContinueRemove-ltem "$OpenCodeBasePathskills\superpowers" -Recurse -Force -frrorAction SilentlyContinue
+#3.创建 superpowers 工具引用
+New-ltem -ltemType SymbolicLink
+-Path "$OpenCodeBasePath\superpowers"
+-Target "$SuperPowersPath"
+#4.创建 superpowers 插件符号链接(新增，不影响现有 plugins，这里注意如果$OpenCodebasePath\plugins目录不存在，那么要手工创建)New-ltem -ltemType symboliclink
+-Path "$OpenCodeBasePathplugins\superpowers.js"Target "$OpenCodeBasePath\superpowers\.opencode\plugins\superpowers.js"
+#5.创建 superpowers 技能目录联接(新增，不影响现有skis，这里注意如果$OpenCodeBasePath\skils日录不存在，那么要手工创建)New-ltem -ltemType Junction
+-Path "$OpenCodeBasePathiskills\superpowers"
+-Target "$OpenCodeBasePath\superpowers\skills"
