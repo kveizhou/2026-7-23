@@ -11,3 +11,18 @@ New-ltem -ltemType SymbolicLink
 #5.创建 superpowers 技能目录联接(新增，不影响现有skis，这里注意如果$OpenCodeBasePath\skils日录不存在，那么要手工创建)New-ltem -ltemType Junction
 -Path "$OpenCodeBasePathiskills\superpowers"
 -Target "$OpenCodeBasePath\superpowers\skills"
+
+
+
+$SuperPowersPath = "D:\0work\01-LLM\121-superpowers\superpowers-main"
+$OpenCodeBasePath = "$env:USERPROFILE\.config\opencode"
+
+# 清理旧的
+Remove-Item "$OpenCodeBasePath\superpowers" -Force -ErrorAction SilentlyContinue
+Remove-Item "$OpenCodeBasePath\plugins\superpowers.js" -Force -ErrorAction SilentlyContinue
+Remove-Item "$OpenCodeBasePath\skills\superpowers" -Recurse -Force -ErrorAction SilentlyContinue
+
+# 创建链接（注意路径不要写错）
+New-Item -ItemType SymbolicLink -Path "$OpenCodeBasePath\superpowers" -Target "$SuperPowersPath" -Force
+New-Item -ItemType SymbolicLink -Path "$OpenCodeBasePath\plugins\superpowers.js" -Target "$SuperPowersPath\.opencode\plugins\superpowers.js" -Force
+New-Item -ItemType Junction -Path "$OpenCodeBasePath\skills\superpowers" -Target "$SuperPowersPath\skills" -Force
